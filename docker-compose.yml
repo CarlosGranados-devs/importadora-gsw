@@ -1,0 +1,13 @@
+services:
+  nodo1:
+    image: autolote-api
+    hostname: nodo1
+    ports: ["9001:9000"]
+  nodo2:
+    image: autolote-api
+    hostname: nodo2
+    ports: ["9002:9000"]
+  nodo3:
+    image: autolote-api
+    hostname: nodo3
+    ports: ["9003:9000"]
