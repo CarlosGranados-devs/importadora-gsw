@@ -91,4 +91,4 @@ El sistema cuenta con un verificador que hace ping a la ruta `/health` de los 3 
 ## Rutas de la API (Endpoints)
 *   `GET /health` : Devuelve el estado de salud del nodo y su identificador único (hostname).
 *   `GET /health?simular=falla` : Fuerza al nodo a devolver un estado 503 (Error de servidor) para pruebas de monitorización.
-*   `GET /api/vehiculos` : (En desarrollo) Retornará el catálogo de vehículos del autolote.
+*   `GET /api/vehiculos` : (En desarrollo) Retornará el catálogo de vehículos del autolote.docker compose ps

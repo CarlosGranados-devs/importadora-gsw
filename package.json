@@ -1,31 +1,20 @@
 {
-  "name": "importadora---gsw",
+  "name": "importadora-gsw",
   "version": "1.0.0",
-  "description": "",
+  "description": "Autolote de Importacion - Cluster de Alta Disponibilidad",
   "main": "index.js",
   "type": "module",
   "scripts": {
-  "build": "tsc",
-  "start": "node dist/index.js"
-},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/CarlosGranados-devs/importadora-gsw.git"
+    "build": "tsc",
+    "start": "node dist/index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/CarlosGranados-devs/importadora-gsw/issues"
-  },
-  "homepage": "https://github.com/CarlosGranados-devs/importadora-gsw#readme",
   "dependencies": {
-    "express": "^5.3.0"
+    "express": "^4.19.2"
   },
   "devDependencies": {
-    "@types/express": "^5.0.6",
-    "@types/node": "^26.6.6",
-    "tsx": "^4.23.15",
-    "typescript": "^7.0.2"
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.7",
+    "tsx": "^4.7.2",
+    "typescript": "^5.4.5"
   }
 }

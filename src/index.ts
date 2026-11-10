@@ -1,14 +1,14 @@
 import express, { Request, Response } from 'express';
 import * as os from 'os';
-import path from 'path';
 
 const app = express();
 const port = process.env.PORT || 9000;
 
-// Configurar Express para servir la carpeta de fotos
+// Servir la interfaz web estática y la carpeta de vehículos
+app.use(express.static('public'));
 app.use('/autos', express.static('autos'));
 
-// Catálogo del Autolote con las rutas completas a las imágenes
+// Inventario del Autolote
 const vehiculos = [
     {
         id: 1,
@@ -99,7 +99,7 @@ const vehiculos = [
     }
 ];
 
-// Ruta de salud para el clúster
+// Endpoint /health (Clase 28)
 app.get('/health', (req: Request, res: Response) => {
     if (req.query.simular === 'falla') {
         return res.status(503).json({
@@ -116,7 +116,7 @@ app.get('/health', (req: Request, res: Response) => {
     });
 });
 
-// Ruta dinámica de vehículos
+// Endpoint dinámico de catálogo
 app.get('/api/vehiculos', (req: Request, res: Response) => {
     res.json({
         negocio: "Autolote de Importación",

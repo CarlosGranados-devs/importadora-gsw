@@ -2,9 +2,10 @@ import express from 'express';
 import * as os from 'os';
 const app = express();
 const port = process.env.PORT || 9000;
-// Configurar Express para servir la carpeta de fotos
+// Servir la interfaz web (public) y las imágenes de los autos (autos)
+app.use(express.static('public'));
 app.use('/autos', express.static('autos'));
-// Catálogo del Autolote con las rutas completas a las imágenes
+// Catálogo del Autolote
 const vehiculos = [
     {
         id: 1,
@@ -94,7 +95,7 @@ const vehiculos = [
         ]
     }
 ];
-// Ruta de salud para el clúster
+// Ruta de salud requerida para el clúster (Clase 28)
 app.get('/health', (req, res) => {
     if (req.query.simular === 'falla') {
         return res.status(503).json({
@@ -110,7 +111,7 @@ app.get('/health', (req, res) => {
         timestamp: new Date().toISOString(),
     });
 });
-// Ruta dinámica de vehículos
+// Ruta dinámica de API de vehículos
 app.get('/api/vehiculos', (req, res) => {
     res.json({
         negocio: "Autolote de Importación",
