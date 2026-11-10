@@ -1,11 +1,3 @@
-import express from 'express';
-import * as os from 'os';
-const app = express();
-const port = process.env.PORT || 9000;
-// Servir la interfaz web (public) y las imágenes de los autos (autos)
-app.use(express.static('public'));
-app.use('/autos', express.static('autos'));
-// Catálogo del Autolote
 const vehiculos = [
     {
         id: 1,
@@ -16,9 +8,9 @@ const vehiculos = [
         motor: "4 cilindros",
         aire: true,
         imagenes: [
+            "/autos/Ford Ranger 2005/ford_2005_lado.jpg",
             "/autos/Ford Ranger 2005/ford_2005_frontal.jpg",
             "/autos/Ford Ranger 2005/ford_2005_interior.jpg",
-            "/autos/Ford Ranger 2005/ford_2005_lado.jpg",
             "/autos/Ford Ranger 2005/ford_2005_motor.jpg",
             "/autos/Ford Ranger 2005/ford_2005_trasero.jpg"
         ]
@@ -51,8 +43,8 @@ const vehiculos = [
         aire: true,
         extras: ["Todas sus bolsas buenas", "Mandos al timón", "Cámara de retroceso"],
         imagenes: [
-            "/autos/Mitsubishi Mirage HB 2019/mirage_hb_frontal.jpg",
             "/autos/Mitsubishi Mirage HB 2019/mirage_hb_lado.jpg",
+            "/autos/Mitsubishi Mirage HB 2019/mirage_hb_frontal.jpg",
             "/autos/Mitsubishi Mirage HB 2019/mirage_hb_trasero.jpg",
             "/autos/Mitsubishi Mirage HB 2019/mirage_hb_interior_1.jpg",
             "/autos/Mitsubishi Mirage HB 2019/mirage_hb_interior_trasero.jpg",
@@ -69,8 +61,8 @@ const vehiculos = [
         motor: "1.2, 3 cilindros",
         estado: "Ya con placas",
         imagenes: [
-            "/autos/Mitsubishi mirage g4 2024/mirage_frontal.png",
             "/autos/Mitsubishi mirage g4 2024/mirage_lado_1.png",
+            "/autos/Mitsubishi mirage g4 2024/mirage_frontal.png",
             "/autos/Mitsubishi mirage g4 2024/mirage_lado_2.png",
             "/autos/Mitsubishi mirage g4 2024/mirage_trasero.png"
         ]
@@ -86,39 +78,13 @@ const vehiculos = [
         motor: "2.0 Boxer",
         estado: "Bolsas buenas",
         imagenes: [
+            "/autos/subaru/subaru_izquierda.jpg",
             "/autos/subaru/subaru_frontal.jpg",
             "/autos/subaru/subaru_derecha.jpg",
-            "/autos/subaru/subaru_izquierda.jpg",
             "/autos/subaru/subaru_trasero.jpg",
             "/autos/subaru/subaru_interior_1.jpg",
             "/autos/subaru/subaru_interior_2.jpg"
         ]
     }
 ];
-// Ruta de salud requerida para el clúster (Clase 28)
-app.get('/health', (req, res) => {
-    if (req.query.simular === 'falla') {
-        return res.status(503).json({
-            estado: 'no saludable',
-            nodo: os.hostname(),
-            timestamp: new Date().toISOString(),
-            mensaje: 'Falla simulada'
-        });
-    }
-    res.status(200).json({
-        estado: 'saludable',
-        nodo: os.hostname(),
-        timestamp: new Date().toISOString(),
-    });
-});
-// Ruta dinámica de API de vehículos
-app.get('/api/vehiculos', (req, res) => {
-    res.json({
-        negocio: "Autolote de Importación",
-        total_autos: vehiculos.length,
-        vehiculos: vehiculos
-    });
-});
-app.listen(port, () => {
-    console.log(`Servidor de Autolote corriendo en http://localhost:${port}`);
-});
+export {};

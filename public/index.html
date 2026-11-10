@@ -30,14 +30,14 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex items-center gap-3">
-    <div class="bg-brand-600 text-white p-2.5 rounded-xl font-black text-xl tracking-wider">
-        J&L
-    </div>
-    <div>
-        <span class="text-2xl font-black text-gray-900 tracking-tight">IMPORTS</span>
-        <span class="block text-xs font-semibold text-brand-600 uppercase tracking-widest">Autolote de Importación</span>
-    </div>
-</div>
+                    <div class="bg-brand-600 text-white p-2.5 rounded-xl font-black text-xl tracking-wider">
+                        J&L
+                    </div>
+                    <div>
+                        <span class="text-2xl font-black text-gray-900 tracking-tight">IMPORTS</span>
+                        <span class="block text-xs font-semibold text-brand-600 uppercase tracking-widest">Autolote de Importación</span>
+                    </div>
+                </div>
 
                 <nav class="hidden md:flex space-x-8 font-medium text-sm text-gray-600">
                     <a href="#" class="text-brand-600 font-semibold">Inicio</a>
@@ -76,7 +76,7 @@
             </div>
             <div class="relative z-10 flex justify-center">
                 <div class="bg-white/10 backdrop-blur-md p-4 rounded-3xl border border-white/10 shadow-2xl">
-                    <img id="hero-img" src="/autos/subaru/subaru_frontal.jpg" alt="Destacado" class="rounded-2xl object-cover h-80 w-full md:w-[480px]">
+                    <img id="hero-img" src="autos/subaru/subaru_izquierda.jpg" alt="Destacado" class="rounded-2xl object-cover h-80 w-full md:w-[480px]">
                 </div>
             </div>
         </div>
@@ -106,7 +106,7 @@
 
     <!-- Modal Detalle -->
     <div id="modal-detalle" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <p class="text-white font-bold text-lg">J&L Imports</p>
+        <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative">
             <button onclick="cerrarModal()" class="absolute top-4 right-4 bg-gray-100 hover:bg-gray-200 text-gray-700 w-10 h-10 rounded-full flex items-center justify-center transition">
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
@@ -118,7 +118,7 @@
     <footer class="bg-gray-900 text-gray-400 py-12 border-t border-gray-800 mt-20">
         <div class="max-w-7xl mx-auto px-4 text-center sm:text-left sm:flex sm:justify-between sm:items-center">
             <div>
-                <p class="text-white font-bold text-lg">GSW Autolote de Importación</p>
+                <p class="text-white font-bold text-lg">J&L Imports</p>
                 <p class="text-sm text-gray-500 mt-1">Gestión de Servidores Web 2026</p>
             </div>
             <div class="mt-4 sm:mt-0 text-xs text-gray-500">
@@ -128,27 +128,119 @@
     </footer>
 
     <script>
+        const vehiculosDefault = [
+            {
+                id: 1,
+                marca: "Ford",
+                modelo: "Ranger 2005",
+                precio: 5200,
+                transmision: "Estándar",
+                motor: "4 cilindros",
+                aire: true,
+                imagenes: [
+                    "autos/Ford Ranger 2005/ford_2005_lado.jpg",
+                    "autos/Ford Ranger 2005/ford_2005_frontal.jpg",
+                    "autos/Ford Ranger 2005/ford_2005_interior.jpg",
+                    "autos/Ford Ranger 2005/ford_2005_motor.jpg",
+                    "autos/Ford Ranger 2005/ford_2005_trasero.jpg"
+                ]
+            },
+            {
+                id: 2,
+                marca: "Peugeot",
+                modelo: "206 2007",
+                precio: 2700,
+                transmision: "Estándar",
+                motor: "1.4",
+                procedencia: "De agencia",
+                aire: true,
+                imagenes: [
+                    "autos/Peugeot 206 año 2007/Peugeot_frontal.jpg",
+                    "autos/Peugeot 206 año 2007/Peugeot_derecha.jpg",
+                    "autos/Peugeot 206 año 2007/Peugeot_izquierda.jpg",
+                    "autos/Peugeot 206 año 2007/Peugeot_trasero.jpg",
+                    "autos/Peugeot 206 año 2007/Peugeot_interior.jpg",
+                    "autos/Peugeot 206 año 2007/Peugeot_interio_trasero.jpg",
+                    "autos/Peugeot 206 año 2007/Peugeot_baul.jpg"
+                ]
+            },
+            {
+                id: 3,
+                marca: "Mitsubishi",
+                modelo: "Mirage HB 2019",
+                precio: 7850,
+                millaje: "37 mil",
+                aire: true,
+                extras: ["Todas sus bolsas buenas", "Mandos al timón", "Cámara de retroceso"],
+                imagenes: [
+                    "autos/Mitsubishi Mirage HB 2019/mirage_hb_lado.jpg",
+                    "autos/Mitsubishi Mirage HB 2019/mirage_hb_frontal.jpg",
+                    "autos/Mitsubishi Mirage HB 2019/mirage_hb_trasero.jpg",
+                    "autos/Mitsubishi Mirage HB 2019/mirage_hb_interior_1.jpg",
+                    "autos/Mitsubishi Mirage HB 2019/mirage_hb_interior_trasero.jpg",
+                    "autos/Mitsubishi Mirage HB 2019/mirage_hb_tablero.jpg",
+                    "autos/Mitsubishi Mirage HB 2019/mirage_hb_baul.jpg"
+                ]
+            },
+            {
+                id: 4,
+                marca: "Mitsubishi",
+                modelo: "Mirage G4 Edition Black 2024",
+                precio: 10500,
+                millaje: "14 mil",
+                motor: "1.2, 3 cilindros",
+                estado: "Ya con placas",
+                imagenes: [
+                    "autos/Mitsubishi mirage g4 2024/mirage_lado_1.png",
+                    "autos/Mitsubishi mirage g4 2024/mirage_frontal.png",
+                    "autos/Mitsubishi mirage g4 2024/mirage_lado_2.png",
+                    "autos/Mitsubishi mirage g4 2024/mirage_trasero.png"
+                ]
+            },
+            {
+                id: 5,
+                marca: "Subaru",
+                modelo: "Impreza 2016",
+                precio: 7800,
+                transmision: "Estándar",
+                millaje: "97 mil",
+                traccion: "4WD (tracción en las 4 llantas)",
+                motor: "2.0 Boxer",
+                estado: "Bolsas buenas",
+                imagenes: [
+                    "autos/subaru/subaru_izquierda.jpg",
+                    "autos/subaru/subaru_frontal.jpg",
+                    "autos/subaru/subaru_derecha.jpg",
+                    "autos/subaru/subaru_trasero.jpg",
+                    "autos/subaru/subaru_interior_1.jpg",
+                    "autos/subaru/subaru_interior_2.jpg"
+                ]
+            }
+        ];
+
         let inventario = [];
 
         async function cargarEstadoNodo() {
             try {
                 const res = await fetch('/health');
+                if (!res.ok) throw new Error();
                 const data = await res.json();
                 document.getElementById('nodo-badge').innerText = `Nodo activo: ${data.nodo || 'Desconocido'}`;
             } catch (err) {
-                document.getElementById('nodo-badge').innerText = 'Nodo Offline';
+                document.getElementById('nodo-badge').innerText = 'Modo Demo (GitHub Pages)';
             }
         }
 
         async function cargarVehiculos() {
             try {
                 const res = await fetch('/api/vehiculos');
+                if (!res.ok) throw new Error();
                 const data = await res.json();
                 inventario = data.vehiculos;
-                renderizarTarjetas(inventario);
             } catch (err) {
-                console.error("Error al cargar inventario:", err);
+                inventario = vehiculosDefault;
             }
+            renderizarTarjetas(inventario);
         }
 
         function renderizarTarjetas(lista) {
