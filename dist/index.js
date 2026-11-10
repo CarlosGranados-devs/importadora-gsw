@@ -1,48 +1,101 @@
-"use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || (function () {
-    var ownKeys = function(o) {
-        ownKeys = Object.getOwnPropertyNames || function (o) {
-            var ar = [];
-            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
-            return ar;
-        };
-        return ownKeys(o);
-    };
-    return function (mod) {
-        if (mod && mod.__esModule) return mod;
-        var result = {};
-        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
-        __setModuleDefault(result, mod);
-        return result;
-    };
-})();
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const os = __importStar(require("os"));
-const app = (0, express_1.default)();
+import express from 'express';
+import * as os from 'os';
+const app = express();
 const port = process.env.PORT || 9000;
-// Ruta requerida en la Clase 28
+// Configurar Express para servir la carpeta de fotos
+app.use('/autos', express.static('autos'));
+// Catálogo del Autolote con las rutas completas a las imágenes
+const vehiculos = [
+    {
+        id: 1,
+        marca: "Ford",
+        modelo: "Ranger 2005",
+        precio: 5200,
+        transmision: "Estándar",
+        motor: "4 cilindros",
+        aire: true,
+        imagenes: [
+            "/autos/Ford Ranger 2005/ford_2005_frontal.jpg",
+            "/autos/Ford Ranger 2005/ford_2005_interior.jpg",
+            "/autos/Ford Ranger 2005/ford_2005_lado.jpg",
+            "/autos/Ford Ranger 2005/ford_2005_motor.jpg",
+            "/autos/Ford Ranger 2005/ford_2005_trasero.jpg"
+        ]
+    },
+    {
+        id: 2,
+        marca: "Peugeot",
+        modelo: "206 2007",
+        precio: 2700,
+        transmision: "Estándar",
+        motor: "1.4",
+        procedencia: "De agencia",
+        aire: true,
+        imagenes: [
+            "/autos/Peugeot 206 año 2007/Peugeot_frontal.jpg",
+            "/autos/Peugeot 206 año 2007/Peugeot_derecha.jpg",
+            "/autos/Peugeot 206 año 2007/Peugeot_izquierda.jpg",
+            "/autos/Peugeot 206 año 2007/Peugeot_trasero.jpg",
+            "/autos/Peugeot 206 año 2007/Peugeot_interior.jpg",
+            "/autos/Peugeot 206 año 2007/Peugeot_interio_trasero.jpg",
+            "/autos/Peugeot 206 año 2007/Peugeot_baul.jpg"
+        ]
+    },
+    {
+        id: 3,
+        marca: "Mitsubishi",
+        modelo: "Mirage HB 2019",
+        precio: 7850,
+        millaje: "37 mil",
+        aire: true,
+        extras: ["Todas sus bolsas buenas", "Mandos al timón", "Cámara de retroceso"],
+        imagenes: [
+            "/autos/Mitsubishi Mirage HB 2019/mirage_hb_frontal.jpg",
+            "/autos/Mitsubishi Mirage HB 2019/mirage_hb_lado.jpg",
+            "/autos/Mitsubishi Mirage HB 2019/mirage_hb_trasero.jpg",
+            "/autos/Mitsubishi Mirage HB 2019/mirage_hb_interior_1.jpg",
+            "/autos/Mitsubishi Mirage HB 2019/mirage_hb_interior_trasero.jpg",
+            "/autos/Mitsubishi Mirage HB 2019/mirage_hb_tablero.jpg",
+            "/autos/Mitsubishi Mirage HB 2019/mirage_hb_baul.jpg"
+        ]
+    },
+    {
+        id: 4,
+        marca: "Mitsubishi",
+        modelo: "Mirage G4 Edition Black 2024",
+        precio: 10500,
+        millaje: "14 mil",
+        motor: "1.2, 3 cilindros",
+        estado: "Ya con placas",
+        imagenes: [
+            "/autos/Mitsubishi mirage g4 2024/mirage_frontal.png",
+            "/autos/Mitsubishi mirage g4 2024/mirage_lado_1.png",
+            "/autos/Mitsubishi mirage g4 2024/mirage_lado_2.png",
+            "/autos/Mitsubishi mirage g4 2024/mirage_trasero.png"
+        ]
+    },
+    {
+        id: 5,
+        marca: "Subaru",
+        modelo: "Impreza 2016",
+        precio: 7800,
+        transmision: "Estándar",
+        millaje: "97 mil",
+        traccion: "4WD (tracción en las 4 llantas)",
+        motor: "2.0 Boxer",
+        estado: "Bolsas buenas",
+        imagenes: [
+            "/autos/subaru/subaru_frontal.jpg",
+            "/autos/subaru/subaru_derecha.jpg",
+            "/autos/subaru/subaru_izquierda.jpg",
+            "/autos/subaru/subaru_trasero.jpg",
+            "/autos/subaru/subaru_interior_1.jpg",
+            "/autos/subaru/subaru_interior_2.jpg"
+        ]
+    }
+];
+// Ruta de salud para el clúster
 app.get('/health', (req, res) => {
-    // Simulación de falla
     if (req.query.simular === 'falla') {
         return res.status(503).json({
             estado: 'no saludable',
@@ -51,16 +104,19 @@ app.get('/health', (req, res) => {
             mensaje: 'Falla simulada'
         });
     }
-    // Estado saludable normal
     res.status(200).json({
         estado: 'saludable',
         nodo: os.hostname(),
         timestamp: new Date().toISOString(),
     });
 });
-// Ruta de prueba para el autolote
+// Ruta dinámica de vehículos
 app.get('/api/vehiculos', (req, res) => {
-    res.json({ mensaje: 'Catálogo de vehículos del autolote próximamente' });
+    res.json({
+        negocio: "Autolote de Importación",
+        total_autos: vehiculos.length,
+        vehiculos: vehiculos
+    });
 });
 app.listen(port, () => {
     console.log(`Servidor de Autolote corriendo en http://localhost:${port}`);
