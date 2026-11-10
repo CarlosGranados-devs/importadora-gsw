@@ -1,3 +1,12 @@
+import express, { Request, Response } from 'express';
+import * as os from 'os';
+
+const app = express();
+const port = process.env.PORT || 9000;
+
+app.use(express.static('public'));
+app.use('/autos', express.static('autos'));
+
 const vehiculos = [
     {
         id: 1,
@@ -87,3 +96,31 @@ const vehiculos = [
         ]
     }
 ];
+
+app.get('/health', (req: Request, res: Response) => {
+    if (req.query.simular === 'falla') {
+        return res.status(503).json({
+            estado: 'no saludable',
+            nodo: os.hostname(),
+            timestamp: new Date().toISOString(),
+            mensaje: 'Falla simulada'
+        });
+    }
+    res.status(200).json({
+        estado: 'saludable',
+        nodo: os.hostname(),
+        timestamp: new Date().toISOString(),
+    });
+});
+
+app.get('/api/vehiculos', (req: Request, res: Response) => {
+    res.json({
+        negocio: "J&L Imports",
+        total_autos: vehiculos.length,
+        vehiculos: vehiculos
+    });
+});
+
+app.listen(port, () => {
+    console.log(`Servidor de Autolote corriendo en http://localhost:${port}`);
+});
