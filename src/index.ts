@@ -119,7 +119,7 @@ app.get('/health', (req: Request, res: Response) => {
 // Endpoint dinámico de catálogo
 app.get('/api/vehiculos', (req: Request, res: Response) => {
     res.json({
-        negocio: "Autolote de Importación",
+        negocio: "J&L Imports",
         total_autos: vehiculos.length,
         vehiculos: vehiculos
     });
