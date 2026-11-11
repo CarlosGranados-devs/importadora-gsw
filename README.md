@@ -1,3 +1,33 @@
+# J&L Imports - Autolote de Importación (GSW)
+
+Este proyecto implementa la arquitectura de alta disponibilidad requerida para el Checkpoint 2 (Gestión de Servidores Web).
+
+## 🏗️ Diagrama de Arquitectura
+
+El siguiente esquema representa la integración de las Unidades 1, 2 y 3. El servidor Apache (con HTTPS) actúa como punto de entrada y proxy inverso hacia nuestro clúster de contenedores Docker.
+
+```mermaid
+flowchart TD
+    Cliente([Navegador Web del Cliente]) -->|HTTPS / Puerto 443| Apache[Servidor Web Apache\nCertificado SSL Autofirmado]
+    
+    subgraph Clúster Docker Compose
+        Apache -->|ProxyPass HTTP| Nodo1[Nodo 1\nautolote-api :9001]
+        Apache -.->|Respaldo| Nodo2[Nodo 2\nautolote-api :9002]
+        Apache -.->|Respaldo| Nodo3[Nodo 3\nautolote-api :9003]
+    end
+
+    Nodo1 --> BD[(Archivos Estáticos\ny Datos API)]
+    Nodo2 --> BD
+    Nodo3 --> BD
+
+    classDef nodo fill:#22c55e,stroke:#16a34a,color:white;
+    classDef apache fill:#f59e0b,stroke:#d97706,color:white;
+    class Nodo1,Nodo2,Nodo3 nodo;
+    class Apache apache;
+
+
+
+
 # Autolote de Importación - Clúster de Alta Disponibilidad
 
 Este proyecto es la implementación de un clúster web con balanceo de carga para un Autolote de Importación, desarrollado para la cátedra de Gestión de Servidores Web. El objetivo principal es garantizar una alta disponibilidad (99.9%) mediante la contenedorización de una API en Node.js/Express y el uso de múltiples nodos idénticos.
