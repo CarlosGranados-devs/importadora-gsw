@@ -1,19 +1,26 @@
 services:
   nodo1:
+    build: .
     image: autolote-api
     hostname: nodo1
+    restart: unless-stopped
     ports: ["9001:9000"]
   nodo2:
+    build: .
     image: autolote-api
     hostname: nodo2
+    restart: unless-stopped
     ports: ["9002:9000"]
   nodo3:
+    build: .
     image: autolote-api
     hostname: nodo3
+    restart: unless-stopped
     ports: ["9003:9000"]
 
   servidor_web:
     image: nginx:alpine
+    restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"
